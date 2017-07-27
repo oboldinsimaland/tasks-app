@@ -1,0 +1,44 @@
+language: php
+
+php:
+  - 7.0
+
+sudo: required
+
+env:
+  global:
+    secure: "er6ILtnTgBcwGa9GSfhPY+NQ7mxY8uAgtDRxXzELBf+JTYxfb6DJMNK4GmU+zHBrLLbvzOdEDdRmb/GNe9CBS+VfkGL9utkzUh0RJIk55VXFUWq87E63LSG00VCiSNRbXmzMITk3MSLwa5CrS9usblVxfljXpnjBTUy8XFfZYgydBaYydflP+oI3THy15nftyhxWEnHY8rB6d/PyIrflc2iKqfag1/toDaPvx27dgUqJHHCW+TCpVyX/zp5IifSzk0qdh00kLpO/xvFyo6crpj3t/jxJKHExCG8tFnr+Q7IZsfwJTzhocFF+qV6vCqlmwfUhs+tALbHR4AqYzOjOYApYYvy6w74walF/9g2sbILD8dUZvmlWWY68umBjUo/XzFCrlaVhkYizzGDjzKEkU7vIMjv68/OV2pj07Y2aZNBdk2A6OFllGZmBJPDp9RdQyuYUL+3ZjTZes8wQpZz/K2hfIAQgbL3dU/s3F6rzxWaBIpbLdiWcWDzPAuwsY/SaDIz/uxtdnFoWzI4BvHubEhtpzXeiFqtx9grVcPo17qbUFCQWjGqX3ECsSI4m6E3MU+aT0XcEIxH+02IvaVfnOIDoOloBeWcQOzF/bScVHVqAHGVbp8suTzUqSl9VDv75C3P1xW456j9O0Hu1ZezGAqJ6bB0TXukCMgBCgA+f0Nw="
+
+# cache vendor dirs
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+services:
+  - postgresql
+
+before_install:
+  - composer config --global github-oauth.github.com "$GITHUB_TOKEN"
+
+install:
+  - travis_retry composer self-update && composer --version
+  - travis_retry composer update --dev --prefer-dist --no-interaction
+
+# setup application:
+  - |
+    ./init --env=Development
+    sed -i "s/mysql:/pgsql:/" common/config/main-local.php
+    sed -i "s/root/postgres/" common/config/main-local.php
+    cat common/config/main-local.php
+    sed -i "s/mysql:/pgsql:/" common/config/test-local.php
+    sed -i "s/root/postgres/" common/config/test-local.php
+    cat common/config/test-local.php
+    sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" frontend/config/main.php
+    sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" backend/config/main.php
+before_script:
+  - psql -c 'create database yii2advanced_test;' -U postgres
+  - php yii_test migrate --interactive=0
+
+script:
+  - composer validate --strict
+  - vendor/bin/codecept run
