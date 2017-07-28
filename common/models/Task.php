@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\db\ActiveRecord;
-
+use common\fixtures\TaskFixture;
 
 class Task extends ActiveRecord
 {
@@ -38,6 +38,13 @@ class Task extends ActiveRecord
             ['id', 'integer', 'on' => self::SCENARIO_COMPLETE],
             ['is_complete', 'boolean', 'on' => self::SCENARIO_COMPLETE],
 
+        ];
+    }
+
+    public function fixtures()
+    {
+        return [
+            'tasks' => TaskFixture::className(),
         ];
     }
 
