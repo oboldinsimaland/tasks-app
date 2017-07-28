@@ -10,19 +10,19 @@ class m170727_122730_create_task_table extends Migration
     /**
      * @inheritdoc
      */
-    public function up()
+    public function safeUp()
     {
         $this->createTable('task', [
             'id' => $this->primaryKey(),
-            'begin_at' => $this->dateTime(),
-            'end_at' => $this->dateTime(),
-            'is_complete' => $this->boolean(),
-            'description' => $this->string(100),
-            'fk_user_id' => $this->integer()->notNull(),
+            'begin_at' => 'TIMESTAMPTZ NOT NULL',                   // время начала задачи
+            'end_at' => 'TIMESTAMPTZ NOT NULL',                     // время окончания задачи
+            'is_complete' => $this->boolean(),                      // выполнена ли задача?
+            'description' => $this->string(100)->notNull(),  // описание
+            'user_id' => $this->integer()->notNull(),               // id пользователя
         ]);
 
         $this->addForeignKey(
-            'fk-task-user_id',
+            'fk_task_user_id',
             'task',
             'user_id',
             'user',
@@ -33,9 +33,9 @@ class m170727_122730_create_task_table extends Migration
     /**
      * @inheritdoc
      */
-    public function down()
+    public function safeDown()
     {
-        $this->dropForeignKey('fk-task-user_id', 'task');
+        $this->dropForeignKey('fk_task_user_id', 'task');
         $this->dropTable('task');
     }
 }
