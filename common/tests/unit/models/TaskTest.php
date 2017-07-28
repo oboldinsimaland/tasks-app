@@ -1,7 +1,7 @@
 <?php
-namespace frontend\tests\unit\models;
+namespace common\tests\unit\models;
 
-use frontend\models\Task;
+use common\models\Task;
 
 class TaskTest extends \Codeception\Test\Unit
 {
