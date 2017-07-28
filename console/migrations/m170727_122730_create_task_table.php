@@ -14,11 +14,11 @@ class m170727_122730_create_task_table extends Migration
     {
         $this->createTable('task', [
             'id' => $this->primaryKey(),
-            'begin_at' => 'TIMESTAMPTZ NOT NULL',                   // время начала задачи
-            'end_at' => 'TIMESTAMPTZ NOT NULL',                     // время окончания задачи
-            'is_complete' => $this->boolean(),                      // выполнена ли задача?
-            'description' => $this->string(100)->notNull(),  // описание
-            'user_id' => $this->integer()->notNull(),               // id пользователя
+            'begin_at' => 'TIMESTAMPTZ NOT NULL',                               // время начала задачи
+            'end_at' => 'TIMESTAMPTZ NOT NULL',                                 // время окончания задачи
+            'is_complete' => $this->boolean()->defaultValue('FALSE'),   // выполнена ли задача?
+            'description' => $this->string(100)->notNull(),             // описание
+            'user_id' => $this->integer()->notNull(),                          // id пользователя
         ]);
 
         $this->addForeignKey(
