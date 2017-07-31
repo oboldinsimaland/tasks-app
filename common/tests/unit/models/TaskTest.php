@@ -82,6 +82,11 @@ class TaskTest extends DbTestCase
 
     public function testUpdateTask()
     {
+        $task = Task::findOne(1);
+        expect($task->description)->equals('Сходить за продуктами');
+        $task->description = 'Сходить в оперный театр';
+        $task->save();
 
+        expect(Task::findOne(1)->description)->equals('Сходить в оперный театр');
     }
 }
