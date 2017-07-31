@@ -1,22 +1,30 @@
 <?php
 namespace common\tests\unit\models;
 
+use yii\codeception\DbTestCase;
 use common\models\Task;
 use common\fixtures\TaskFixture;
 
-class TaskTest extends \Codeception\Test\Unit
+class TaskTest extends DbTestCase
 {
-    protected $tester;
+//    protected $tester;
     protected $task;
+
+    public function fixtures()
+    {
+        return [
+          'tasks' => TaskFixture::className(),
+        ];
+    }
 
     public function _before()
     {
-        $this->tester->haveFixtures([
-            'task' => [
-                'class' => TaskFixture::className(),
-                'dataFile' => codecept_data_dir() . 'task.php'
-            ]
-        ]);
+//        $this->tester->haveFixtures([
+//            'task' => [
+//                'class' => TaskFixture::className(),
+//                'dataFile' => codecept_data_dir() . 'task.php'
+//            ]
+//        ]);
 
         $this->task = new Task();
         $this->task->id = 4;
@@ -77,5 +85,10 @@ class TaskTest extends \Codeception\Test\Unit
     {
         expect_that(Task::findOne(1)->delete());
         expect_not(Task::findOne(1));
+    }
+
+    public function testUpdateTask()
+    {
+
     }
 }
