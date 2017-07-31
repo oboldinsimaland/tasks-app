@@ -66,11 +66,10 @@ class TaskTest extends \Codeception\Test\Unit
         expect_not($this->task->validate());
     }
 
-    public function testHasAllTasks()
+    public function testFindTaskById()
     {
-        $this->tester->haveRecord('common/model/Task', ['id' => 1]);
-        $this->tester->haveRecord('common/model/Task', ['id' => 2]);
-        $this->tester->haveRecord('common/model/Task', ['id' => 3]);
-
+        expect_that($task = Task::find(1));
+        expect_that($task->description)->equals('Сходить за продуктами');
+        expect_not(Task::find(8));
     }
 }
