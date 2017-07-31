@@ -19,15 +19,13 @@ class TaskTest extends DbTestCase
 
     public function _before()
     {
-
-
         $this->task = new Task();
         $this->task->id = 4;
         $this->task->begin_at = '2018-01-22 00:40:00';
         $this->task->end_at = '2018-01-22 05:00:00';
         $this->task->is_complete = false;
         $this->task->description = 'Пойти погулять';
-        $this->task->user_id = 125;
+        $this->task->user_id = 1;
     }
 
     public function testCreateCorrectTask()
@@ -77,7 +75,8 @@ class TaskTest extends DbTestCase
 
     public function testDeleteTask()
     {
-        expect_that(Task::findOne(1)->delete());
+        expect_that($task = Task::findOne(1));
+        $task->delete();
         expect_not(Task::findOne(1));
     }
 
