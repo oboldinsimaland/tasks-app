@@ -65,4 +65,12 @@ class TaskTest extends \Codeception\Test\Unit
 
         expect_not($this->task->validate());
     }
+
+    public function testHasAllTasks()
+    {
+        $this->tester->haveRecord('common/model/Task', ['id' => 1]);
+        $this->tester->haveRecord('common/model/Task', ['id' => 2]);
+        $this->tester->haveRecord('common/model/Task', ['id' => 3]);
+
+    }
 }
