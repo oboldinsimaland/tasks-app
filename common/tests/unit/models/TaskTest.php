@@ -78,8 +78,8 @@ class TaskTest extends DbTestCase
 
     public function testDeleteTask()
     {
-        expect_that(Task::findOne(1)->delete());
-        expect_not(Task::findOne(1));
+        expect_that($this->tasks('task1')->delete());
+        expect_not($this->tasks('task1'));
     }
 
     public function testUpdateTask()
