@@ -7,7 +7,7 @@ use common\fixtures\TaskFixture;
 
 class TaskTest extends DbTestCase
 {
-//    protected $tester;
+
     protected $task;
 
     public function fixtures()
@@ -19,12 +19,7 @@ class TaskTest extends DbTestCase
 
     public function _before()
     {
-//        $this->tester->haveFixtures([
-//            'task' => [
-//                'class' => TaskFixture::className(),
-//                'dataFile' => codecept_data_dir() . 'task.php'
-//            ]
-//        ]);
+
 
         $this->task = new Task();
         $this->task->id = 4;
@@ -76,7 +71,7 @@ class TaskTest extends DbTestCase
 
     public function testFindTaskById()
     {
-        expect_that($task = Task::findOne(1));
+        expect_that($task = $this->tasks('task1'));
         expect($task->description)->equals('Сходить за продуктами');
         expect_not(Task::findOne(8));
     }
