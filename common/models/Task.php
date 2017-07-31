@@ -22,7 +22,7 @@ class Task extends ActiveRecord
 
             [['begin_at', 'end_at', 'description', 'user_id'], 'required', 'on' => self::SCENARIO_CREATE],
             [['begin_at', 'end_at'], 'datetime', 'on' => self::SCENARIO_CREATE],
-            ['description', 'string', 'length' => [0, 100], 'on' => self::SCENARIO_CREATE],
+            ['description', 'string', 'length' => [3, 100], 'on' => self::SCENARIO_CREATE],
             [['begin_at', 'end_at', 'description'], 'safe', 'on' => self::SCENARIO_CREATE],
 
             [['id', 'begin_at', 'end_at', 'description'], 'required', 'on' => self::SCENARIO_UPDATE],
@@ -49,3 +49,4 @@ class Task extends ActiveRecord
     }
 
 }
+
