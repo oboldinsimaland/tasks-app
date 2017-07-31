@@ -12,7 +12,7 @@ class TaskTest extends DbTestCase
 
     public function fixtures()
     {
-        return TaskFixture::className();
+        return [TaskFixture::className()];
     }
 
     public function _before()
