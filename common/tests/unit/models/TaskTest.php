@@ -71,9 +71,8 @@ class TaskTest extends DbTestCase
 
     public function testFindTaskById()
     {
-        expect_that($task = $this->tasks('task1'));
+        expect_that($task = Task::findOne(1));
         expect($task->description)->equals('Сходить за продуктами');
-        expect_not(Task::findOne(8));
     }
 
     public function testDeleteTask()
