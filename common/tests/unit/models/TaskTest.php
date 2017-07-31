@@ -69,7 +69,7 @@ class TaskTest extends \Codeception\Test\Unit
     public function testFindTaskById()
     {
         expect_that($task = Task::findOne(1));
-        expect_that($task->description)->equals('Сходить за продуктами');
+        expect($task->description)->equals('Сходить за продуктами');
         expect_not(Task::findOne(8));
     }
 }
