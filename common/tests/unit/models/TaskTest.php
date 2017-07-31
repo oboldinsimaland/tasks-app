@@ -72,4 +72,10 @@ class TaskTest extends \Codeception\Test\Unit
         expect($task->description)->equals('Сходить за продуктами');
         expect_not(Task::findOne(8));
     }
+
+    public function testDeleteTask()
+    {
+        expect_that(Task::findOne(1)->delete());
+        expect_not(Task::findOne(1));
+    }
 }
