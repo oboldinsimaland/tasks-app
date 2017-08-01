@@ -1,9 +1,9 @@
 <?php
-namespace common\tests\unit\models;
+namespace frontend\tests\unit\models;
 
 use yii\codeception\DbTestCase;
 use common\models\Task;
-use common\fixtures\TaskFixture;
+use frontend\tests\fixtures\TaskFixture;
 
 class TaskTest extends DbTestCase
 {
