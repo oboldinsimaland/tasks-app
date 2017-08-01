@@ -28,3 +28,8 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+
+# my log files
+/common/log.txt
+/console/log.txt
+/frontend/log.txt
