@@ -3,7 +3,6 @@
 namespace common\models;
 
 use yii\db\ActiveRecord;
-use common\fixtures\TaskFixture;
 
 /**
  * Task model
@@ -15,8 +14,6 @@ use common\fixtures\TaskFixture;
  * @property string $description
  * @property integer $user_id
  */
-
-
 class Task extends ActiveRecord
 {
 
