@@ -19,7 +19,8 @@ class Task extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules(){
+    public function rules()
+    {
         return [
             [['begin_at', 'end_at', 'description', 'user_id'], 'required'],
             [['begin_at', 'end_at'] ,'datetime', 'format'=>'yyyy-MM-dd HH:mm:ss+zz'],
