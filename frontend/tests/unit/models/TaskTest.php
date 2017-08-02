@@ -7,9 +7,9 @@ use frontend\tests\fixtures\TaskFixture;
 
 class TaskTest extends DbTestCase
 {
-
-    protected $task;
-
+    /**
+     * @inheritdoc
+     */
     public function fixtures()
     {
         return [
@@ -17,28 +17,34 @@ class TaskTest extends DbTestCase
         ];
     }
 
-    public function _before()
-    {
-        $this->task = new Task();
-        $this->task->id = 4;
-        $this->task->begin_at = '2018-01-22 00:40:00';
-        $this->task->end_at = '2018-01-22 05:00:00';
-        $this->task->is_complete = false;
-        $this->task->description = 'Пойти погулять';
-        $this->task->user_id = 1;
-    }
-
+    /**
+     * Tests creating correct task
+     */
     public function testCreateCorrectTask()
     {
+        $task = new Task();
+        $task->id = 4;
+        $task->begin_at = '2018-01-22 00:40:00';
+        $task->end_at = '2018-01-22 05:00:00';
+        $task->is_complete = false;
+        $task->description = 'Пойти погулять';
+        $task->user_id = 1;
+
         expect($this->task->validate());
     }
 
+    /**
+     * Tests finding task by id
+     */
     public function testFindTaskById()
     {
         expect_that($task = Task::findOne(1));
         expect($task->description)->equals('Сходить за продуктами');
     }
 
+    /**
+     * Tests deleting task
+     */
     public function testDeleteTask()
     {
         expect($task = Task::findOne(1));
@@ -46,6 +52,9 @@ class TaskTest extends DbTestCase
         expect_not(Task::findOne(1));
     }
 
+    /**
+     * Tests updating task
+     */
     public function testUpdateTask()
     {
         $task = Task::findOne(1);
