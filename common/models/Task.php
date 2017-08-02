@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use yii\db\ActiveRecord;
+use yii\db\ActiveRecord;use yii\helpers\Console;
 
 /**
  * Task model
@@ -22,12 +22,12 @@ class Task extends ActiveRecord
     public function rules(){
         return [
             [['begin_at', 'end_at', 'description', 'user_id'], 'required'],
-            [['begin_at', 'end_at'], 'safe'],
+            [['begin_at', 'end_at'] ,'datetime', 'format'=>'yyyy-MM-dd HH:mm:ss+zz'],
+            [['begin_at', 'end_at'] ,'safe'],
             [['is_complete'], 'boolean'],
             [['user_id'], 'integer'],
             [['description'], 'string',  'length' => [3, 100]],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
-
         ];
     }
 

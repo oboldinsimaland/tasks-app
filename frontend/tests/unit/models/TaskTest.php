@@ -18,24 +18,27 @@ class TaskTest extends DbTestCase
     }
 
     /**
-     * Tests creating correct task
+     * Tests creating new task
      */
     public function testCreateCorrectTask()
     {
         $task = new Task();
         $task->id = 4;
-        $task->begin_at = '2018-01-22 00:40:00';
-        $task->end_at = '2018-01-22 05:00:00';
+        $task->begin_at = '2018-01-22 00:40:00+05';
+        $task->end_at = '2018-01-22 05:00:00+05';
         $task->is_complete = false;
         $task->description = 'Пойти погулять';
         $task->user_id = 1;
 
         expect($task->validate());
+        $task->save();
+
+        expect(Task::findOne(4)->description === 'Пойти погулять');
     }
 
     /**
      * Tests finding task by id
-     */
+    */
     public function testFindTaskById()
     {
         expect_that($task = Task::findOne(1));
@@ -43,7 +46,7 @@ class TaskTest extends DbTestCase
     }
 
     /**
-     * Tests deleting task
+     * Tests finding task by id
      */
     public function testDeleteTask()
     {
@@ -60,7 +63,7 @@ class TaskTest extends DbTestCase
         $task = Task::findOne(1);
         expect($task->description)->equals('Сходить за продуктами');
         $task->description = 'Сходить в оперный театр';
-        $task->save();
+        expect($task->save());
 
         expect(Task::findOne(1)->description)->equals('Сходить в оперный театр');
     }
