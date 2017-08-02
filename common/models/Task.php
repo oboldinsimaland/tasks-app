@@ -1,5 +1,4 @@
 <?php
-
 namespace common\models;
 
 use yii\db\ActiveRecord;
@@ -56,5 +55,4 @@ class Task extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-
 }
