@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\tests\functional;
 
 use \backend\tests\FunctionalTester;

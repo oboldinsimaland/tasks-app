@@ -1,5 +1,4 @@
 <?php
-
 namespace frontend\tests\unit\models;
 
 use Yii;

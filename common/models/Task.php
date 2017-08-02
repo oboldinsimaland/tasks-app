@@ -1,5 +1,4 @@
 <?php
-
 namespace common\models;
 
 use yii\db\ActiveRecord;
@@ -19,7 +18,8 @@ class Task extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules(){
+    public function rules()
+    {
         return [
             [['begin_at', 'end_at', 'description', 'user_id'], 'required'],
             [['begin_at', 'end_at'] ,'datetime', 'format'=>'yyyy-MM-dd HH:mm:ss+zz'],
@@ -55,5 +55,4 @@ class Task extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-
 }
