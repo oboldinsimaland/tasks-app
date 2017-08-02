@@ -16,8 +16,9 @@ use yii\db\ActiveRecord;
  */
 class Task extends ActiveRecord
 {
-
-
+    /**
+     * @inheritdoc
+     */
     public function rules(){
         return [
             [['begin_at', 'end_at', 'description', 'user_id'], 'required'],
@@ -30,6 +31,9 @@ class Task extends ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels()
     {
         return [
@@ -43,9 +47,11 @@ class Task extends ActiveRecord
     }
 
     /**
+     * Returns a user
+     *
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function user()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }

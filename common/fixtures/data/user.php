@@ -2,13 +2,13 @@
 
 return [
     [
-        'username' => 'bayer.hudson',
-        'auth_key' => 'HP187Mvq7Mmm3CTU80dLkGmni_FUH_lR',
+        'username' => 'oboldindb',
+        'auth_key' => 'YQIrWIPwrVJGZw4UBjigImBh30oIb-hr',
         //password_0
-        'password_hash' => '$2y$13$EjaPFBnZOQsHdGuHI.xvhuDp1fHpo8hKRSk6yshqa9c5EG8s3C3lO',
-        'password_reset_token' => 'ExzkCOaYc1L8IOBs4wdTGGbgNiG3Wz1I_1402312317',
-        'created_at' => '1402312317',
-        'updated_at' => '1402312317',
-        'email' => 'nicole.paucek@schultz.info',
+        'password_hash' => '$2y$13$2ogqrr.MOD6z1M3IgRQj5.jGsx6BxSsLD8A1NXai9olQxrt6ylr8O',
+        'password_reset_token' => null,
+        'created_at' => '1501585523',
+        'updated_at' => '1501585523',
+        'email' => 'oboldindb@example.com',
     ],
 ];
