@@ -30,7 +30,7 @@ class TaskTest extends DbTestCase
         $task->description = 'Пойти погулять';
         $task->user_id = 1;
 
-        expect($this->task->validate());
+        expect($task->validate());
     }
 
     /**
