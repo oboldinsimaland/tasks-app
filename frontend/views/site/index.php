@@ -1,53 +1,84 @@
 <?php
+use \yii\helpers\Html;
+use \yii\helpers\Url;
+use \yii\widgets\LinkPager;
 
-/* @var $this yii\web\View */
-
-$this->title = 'My Yii Application';
+$this->title = 'Список дел';
 ?>
+
 <div class="site-index">
 
+    <style>
+        .task .panel-body {
+            font-size: 14pt;
+        }
+
+        .task .panel-footer {
+            background-color: #a9a9a9;
+            text-align: right;
+            font-size: 18pt;
+            word-spacing: 15pt;
+        }
+
+        .task .glyphicon-remove {
+            color: #e00;
+        }
+
+        .task .glyphicon-pencil {
+            color: #00e;
+        }
+
+        .task .glyphicon-ok {
+            color: #0a0;
+        }
+
+        .task.complete .panel-body {
+            background-color: #e1e1e1;
+        }
+
+        .task.complete .panel-footer {
+            background-color: #c1c1c1;
+        }
+
+        .task.complete .glyphicon-ok {
+            color: #0f0f0f;
+        }
+
+    </style>
+
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Список дел.</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Нажмите кнопку добавить, чтобы добавить новую задачу.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <p><a class="btn btn-lg btn-success" href="<?= Url::toRoute('/add') ?>">Добавить</a></p>
     </div>
 
-    <div class="body-content">
+    <?php foreach ($tasks as $task):?>
+        <?php $complete = $task->is_complete ? true : false ?>
+        <div class="panel panel-default task <?= $complete ? 'complete' : null ?>">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <div class="panel-body">
+                <p><b><?= $task->getAttributeLabel('begin_at')    ?>:</b> <?= Html::encode($task->begin_at)    ?> </p>
+                <p><b><?= $task->getAttributeLabel('end_at')      ?>:</b> <?= Html::encode($task->end_at)      ?> </p>
+                <p><b><?= $task->getAttributeLabel('description') ?>:</b> <?= Html::encode($task->description) ?> </p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <div class="panel-footer">
+                <a href="<?= Url::to([ '/delete', 'id' => $task->id ]) ?>"><span class="glyphicon glyphicon-remove" ></span></a>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <?php if (!$complete): ?>
+                <a href="<?= Url::to([ '/update', 'id' => $task->id ]) ?>"><span class="glyphicon glyphicon-pencil" ></span></a>
+                <?php endif; ?>
+
+                <a href="<?= Url::to([ '/complete', 'id' => $task->id, 'complete' => !$complete ]) ?>"><span class="glyphicon glyphicon-ok"></span></a>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
         </div>
+    <?php endforeach; ?>
+
+    <?= LinkPager::widget(['pagination' => $pagination ]) ?>
 
     </div>
+
 </div>
