@@ -1,12 +1,12 @@
 <?php
 
-namespace frontend\tests\fixtures;
+namespace common\fixtures;
 
 use yii\test\ActiveFixture;
 
 /**
  * Task fixture
- * */
+ */
 class TaskFixture extends ActiveFixture
 {
     /**

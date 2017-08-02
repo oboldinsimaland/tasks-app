@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use yii\db\ActiveRecord;use yii\helpers\Console;
+use yii\db\ActiveRecord;
 
 /**
  * Task model

@@ -1,9 +1,9 @@
 <?php
-namespace frontend\tests\unit\models;
+namespace common\tests\unit\models;
 
 use yii\codeception\DbTestCase;
 use common\models\Task;
-use frontend\tests\fixtures\TaskFixture;
+use common\fixtures\TaskFixture;
 
 class TaskTest extends DbTestCase
 {
@@ -30,7 +30,6 @@ class TaskTest extends DbTestCase
         $task->description = 'Пойти погулять';
         $task->user_id = 1;
 
-        expect($task->validate());
         $task->save();
 
         expect(Task::findOne(4)->description === 'Пойти погулять');
