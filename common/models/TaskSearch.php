@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use common\models\Task;
 
 /**
- * TaskSearch represents the model behind the search form about `app\models\Task`.
+ * TaskSearch represents the model behind the search form about `common\models\Task`.
  */
 class TaskSearch extends Task
 {
@@ -22,13 +22,11 @@ class TaskSearch extends Task
             ],
 
             [
-                ['begin_at', 'end_at', 'description'],
-                'safe',
+                ['begin_at', 'end_at', 'description'],  'safe',
             ],
 
             [
-                ['is_complete'],
-                'boolean',
+                ['is_complete'], 'boolean',
             ],
         ];
     }
@@ -51,7 +49,7 @@ class TaskSearch extends Task
      */
     public function search($params)
     {
-        $query = Task::find();
+        $query = Task::find()->where(['user_id' => Yii::$app->user->id]);
 
         // add conditions that should always apply here
 

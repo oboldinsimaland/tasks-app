@@ -3,13 +3,12 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
-use yii\data\Pagination;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use common\models\Task;
+use common\models\TaskSearch;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -73,25 +72,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $userId = Yii::$app->user->id;
-        $query = Task::find();
-
-        $pagination = new Pagination([
-            'defaultPageSize' => 5,
-            'totalCount' => $query->count(),
-        ]);
-
-
-        $tasks = $query
-            ->where([ 'user_id' => $userId ])
-            ->orderBy(['begin_at' => SORT_ASC, 'is_complete' => SORT_ASC])
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+        $searchModel = new TaskSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'tasks' => $tasks,
-            'pagination' => $pagination,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
