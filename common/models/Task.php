@@ -18,6 +18,14 @@ class Task extends ActiveRecord
     /**
      * @inheritdoc
      */
+    public static function tableName()
+    {
+        return 'task';
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [

@@ -1,53 +1,69 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'My Yii Application';
+use \yii\helpers\Html;
+use \yii\widgets\ListView;
+
+$this->title = 'Список дел';
 ?>
+
 <div class="site-index">
 
+    <style>
+        .task .panel-body {
+            font-size: 14pt;
+        }
+
+        .task .panel-footer {
+            background-color: #a9a9a9;
+            text-align: right;
+            font-size: 18pt;
+            word-spacing: 15pt;
+        }
+
+        .task .glyphicon-remove {
+            color: #e00;
+        }
+
+        .task .glyphicon-pencil {
+            color: #00e;
+        }
+
+        .task .glyphicon-ok {
+            color: #0a0;
+        }
+
+        .task.complete .panel-body {
+            background-color: #e1e1e1;
+        }
+
+        .task.complete .panel-footer {
+            background-color: #c1c1c1;
+        }
+
+        .task.complete .glyphicon-ok {
+            color: #0f0f0f;
+        }
+
+    </style>
+
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1><?= Html::encode($this->title) ?></h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Нажмите кнопку "добавить", чтобы добавить новую задачу.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
-        </div>
+        <p>
+            <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
 
     </div>
+
+    <?php echo ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '_task',
+        'summary' => 'Показано <b>{count}</b> из <b>{totalCount}</b>',
+    ]);?>
+
 </div>
