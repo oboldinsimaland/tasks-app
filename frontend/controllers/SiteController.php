@@ -14,7 +14,8 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 
 /**
- * Site controller
+ * Site controller implements the CRUD actions for Task model
+ * and standard actions like login, logout, sigup, etc.
  */
 class SiteController extends Controller
 {

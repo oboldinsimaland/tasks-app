@@ -1,4 +1,8 @@
 <?php
+
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
 use \yii\helpers\Html;
 use \yii\widgets\ListView;
 
@@ -59,6 +63,7 @@ $this->title = 'Список дел';
     <?php echo ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_task',
+        'summary' => 'Показано <b>{count}</b> из <b>{totalCount}</b>',
     ]);?>
 
 </div>
