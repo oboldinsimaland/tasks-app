@@ -93,7 +93,6 @@ class SiteController extends Controller
         $model = new CreateTaskForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
             $task = new Task();
             $task->begin_at = $model->begin_at;
             $task->end_at = $model->end_at;
@@ -102,13 +101,10 @@ class SiteController extends Controller
             $task->save();
 
             return $this->redirect(['site/index']);
-
         } else {
-
             return $this->render('create', [
                 'model' => $model,
             ]);
-
         }
     }
 
