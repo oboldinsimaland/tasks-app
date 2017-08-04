@@ -13,7 +13,7 @@ class m170727_122730_create_task_table extends Migration
     public function safeUp()
     {
         $this->createTable('task', [
-            'id' => $this->primaryKey(),
+            'id' => 'SERIAL PRIMARY KEY',
             'begin_at' => 'TIMESTAMPTZ NOT NULL',                               // время начала задачи
             'end_at' => 'TIMESTAMPTZ NOT NULL',                                 // время окончания задачи
             'is_complete' => $this->boolean()->defaultValue('FALSE'),   // выполнена ли задача?
