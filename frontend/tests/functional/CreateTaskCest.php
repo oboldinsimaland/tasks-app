@@ -30,7 +30,7 @@ class CreateTaskCest
         $I->fillField('Конец', '2017-08-31 21:30:00+05');
         $I->fillField('Описание', 'Купить новый iPad');
         $I->click('#create-form button[type=submit]');
-        $I->see('Показано 4 из 4');
         $I->see('Купить новый iPad');
+        $I->seeRecord('common\models\Task', ['id' => 4,'description' => 'Купить новый iPad']);
     }
 }

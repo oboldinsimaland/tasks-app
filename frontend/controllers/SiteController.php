@@ -90,13 +90,12 @@ class SiteController extends Controller
      */
     public function actionCreate()
     {
+        $post = Yii::$app->request->post();
         $model = new CreateTaskForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load($post) && $model->validate()) {
             $task = new Task();
-            $task->begin_at = $model->begin_at;
-            $task->end_at = $model->end_at;
-            $task->description = $model->description;
+            $task->load($post, 'CreateTaskForm');
             $task->user_id = Yii::$app->user->id;
             $task->save();
 

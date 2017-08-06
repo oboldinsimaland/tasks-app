@@ -33,8 +33,6 @@ class CreateTaskForm extends Model
                 'message' => 'Введите корректную дату и время',
             ],
 
-
-
             // description must be a string from 3 to 100 length
             [
                 ['description'],
