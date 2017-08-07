@@ -20,7 +20,7 @@ $complete = $model->is_complete;
         <a href="<?= Url::to([ 'site/update', 'id' => $model->id ]) ?>"><span class="glyphicon glyphicon-pencil" ></span></a>
         <?php endif; ?>
 
-        <a href="<?= Url::to([ 'site/complete', 'id' => $model->id, 'complete' => !$complete ]) ?>"><span class="glyphicon glyphicon-ok"></span></a>
+        <a href="<?= Url::to([ 'site/toggle', 'id' => $model->id, 'complete' => !$complete ]) ?>"><span class="glyphicon glyphicon-ok"></span></a>
     </div>
 
 </div>

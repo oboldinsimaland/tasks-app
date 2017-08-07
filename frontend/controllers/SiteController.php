@@ -154,6 +154,25 @@ class SiteController extends Controller
     }
 
     /**
+     * Changes 'complete' state of the task
+     *
+     * @param integer $id
+     * @param integer $complete
+     * @return mixed
+     */
+    public function actionToggle($id, $complete)
+    {
+        $task = $this->findModel($id);
+
+        if ($task->user_id === Yii::$app->user->id) {
+            $task->is_complete = (boolean) $complete;
+            $task->save();
+        }
+
+        return $this->redirect('index');
+    }
+
+    /**
      * Logs in a user.
      *
      * @return mixed
