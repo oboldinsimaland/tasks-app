@@ -72,8 +72,8 @@ class Task extends ActiveRecord
      * @throws NotFoundHttpException
      * @return Task
      */
-    public static function findModel($id){
-
+    public static function findModel($id)
+    {
         if ($id !== null) {
             $task = Task::findOne($id);
 
