@@ -1,12 +1,14 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Task;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\CreateTaskForm;
 use common\models\LoginForm;
 use common\models\TaskSearch;
 use frontend\models\PasswordResetRequestForm;
@@ -79,6 +81,30 @@ class SiteController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    /**
+     * Displays form for creating new task and add new task in db
+     *
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $post = Yii::$app->request->post();
+        $model = new CreateTaskForm();
+
+        if ($model->load($post) && $model->validate()) {
+            $task = new Task();
+            $task->load($post, 'CreateTaskForm');
+            $task->user_id = Yii::$app->user->id;
+            $task->save();
+
+            return $this->redirect(['site/index']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

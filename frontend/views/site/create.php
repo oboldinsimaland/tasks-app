@@ -1,0 +1,43 @@
+<?php
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$this->title = 'Добавить задачу';
+?>
+
+<h1><?= Html::encode($this->title) ?></h1>
+
+<?php
+$form = ActiveForm::begin([
+    'id' => 'create-form',
+    'options' => [
+        'class' => ['form-horizontal', 'col-lg-4'],
+    ],
+]);
+?>
+
+    <?= $form
+            ->field($model, 'begin_at')
+            ->textInput()
+            ->hint('Формат: \'yyyy-MM-dd HH:mm:ss+zz\'');
+    ?>
+    <?= $form
+            ->field($model, 'end_at')
+            ->textInput()
+            ->hint('Формат: \'yyyy-MM-dd HH:mm:ss+zz\'');
+    ?>
+    <?= $form
+            ->field($model, 'description')
+            ->textarea(['rows' => 5])
+            ->hint('Описание поставленной задачи');
+    ?>
+
+    <div class="form-group">
+        <i>Все поля обязательны к заполнению</i>
+    </div>
+
+    <div class="form-group">
+        <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
+    </div>
+
+<?php ActiveForm::end() ?>
