@@ -14,13 +14,13 @@ $complete = $model->is_complete;
     </div>
 
     <div class="panel-footer">
-        <a href="<?= Url::to([ '/delete', 'id' => $model->id ]) ?>"><span class="glyphicon glyphicon-remove" ></span></a>
+        <a href="<?= Url::to([ 'site/delete', 'id' => $model->id ]) ?>"><span class="glyphicon glyphicon-remove" ></span></a>
 
         <?php if (!$complete): ?>
-        <a href="<?= Url::to([ '/update', 'id' => $model->id ]) ?>"><span class="glyphicon glyphicon-pencil" ></span></a>
+        <a href="<?= Url::to([ 'site/update', 'id' => $model->id ]) ?>"><span class="glyphicon glyphicon-pencil" ></span></a>
         <?php endif; ?>
 
-        <a href="<?= Url::to([ '/complete', 'id' => $model->id, 'complete' => !$complete ]) ?>"><span class="glyphicon glyphicon-ok"></span></a>
+        <a href="<?= Url::to([ 'site/complete', 'id' => $model->id, 'complete' => !$complete ]) ?>"><span class="glyphicon glyphicon-ok"></span></a>
     </div>
 
 </div>

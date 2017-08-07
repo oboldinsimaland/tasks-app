@@ -8,7 +8,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\CreateTaskForm;
+use common\models\TaskForm;
 use common\models\LoginForm;
 use common\models\TaskSearch;
 use frontend\models\PasswordResetRequestForm;
@@ -91,11 +91,11 @@ class SiteController extends Controller
     public function actionCreate()
     {
         $post = Yii::$app->request->post();
-        $model = new CreateTaskForm();
+        $model = new TaskForm();
 
         if ($model->load($post) && $model->validate()) {
             $task = new Task();
-            $task->load($post, 'CreateTaskForm');
+            $task->load($post, 'TaskForm');
             $task->user_id = Yii::$app->user->id;
             $task->save();
 
@@ -105,6 +105,33 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    /**
+     * Displays form for updating task and saves changes in db
+     *
+     * @return mixed
+     */
+    public function actionUpdate()
+    {
+        $post = Yii::$app->request->post();
+        $model = new TaskForm();
+        $task = Task::findOne(Yii::$app->request->get('id'));
+
+        if ($task->user_id === Yii::$app->user->id && !$task->is_complete) {
+            if ($model->load($post) && $model->validate()) {
+                $task->load($post, 'TaskForm');
+                $task->user_id = Yii::$app->user->id;
+                $task->save();
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                    'task' => $task,
+                ]);
+            }
+        }
+
+        return $this->redirect(['site/index']);
     }
 
     /**
