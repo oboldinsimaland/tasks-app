@@ -25,9 +25,9 @@ class TaskCest
     public function checkListOfTasks(FunctionalTester $I)
     {
         $I->amOnRoute('site/index');
-        $I->see('Сходить за продуктами',  '[data-key=1]');
-        $I->see('Встретиться с друзьями',  '[data-key=2]');
-        $I->see('Сходить в кино',  '[data-key=3]');
+        $I->see('Сходить за продуктами', '[data-key=1]');
+        $I->see('Встретиться с друзьями', '[data-key=2]');
+        $I->see('Сходить в кино', '[data-key=3]');
     }
 
     public function createNewTask(FunctionalTester $I)
