@@ -160,7 +160,7 @@ class SiteController extends Controller
      * @param integer $complete
      * @return mixed
      */
-    public function actionComplete($id, $complete)
+    public function actionToggle($id, $complete)
     {
         $task = $this->findModel($id);
 

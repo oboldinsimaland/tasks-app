@@ -94,11 +94,5 @@ class TaskCest
     {
         $I->amOnRoute('site/delete', ['id' => 888]);
         $I->see('Not Found (#404)');
-
-        $I->amOnRoute('site/complete', [
-            'id' => 1000,
-            'complete' => false,
-        ]);
-        $I->see('Not Found (#404)');
     }
 }
