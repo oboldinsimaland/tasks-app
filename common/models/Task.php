@@ -2,6 +2,7 @@
 namespace common\models;
 
 use yii\db\ActiveRecord;
+use yii\web\NotFoundHttpException;
 
 /**
  * Task model
@@ -62,5 +63,25 @@ class Task extends ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * Returns task by id
+     *
+     * @param integer $id
+     * @throws NotFoundHttpException
+     * @return Task
+     */
+    public static function findModel($id){
+
+        if ($id !== null) {
+            $task = Task::findOne($id);
+
+            if (isset($task)) {
+                return $task;
+            }
+        }
+
+        throw new NotFoundHttpException("Model not found: $id");
     }
 }

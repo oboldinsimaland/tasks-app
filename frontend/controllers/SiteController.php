@@ -117,7 +117,7 @@ class SiteController extends Controller
     {
         $post = Yii::$app->request->post();
         $model = new TaskForm();
-        $task = Task::findOne($id);
+        $task = Task::findModel($id);
 
         if ($task->user_id === Yii::$app->user->id && !$task->is_complete) {
             if ($model->load($post) && $model->validate()) {
@@ -143,7 +143,7 @@ class SiteController extends Controller
      */
     public function actionDelete($id)
     {
-        $task = Task::findOne($id);
+        $task = Task::findModel($id);
 
         if ($task->user_id === Yii::$app->user->id) {
             $task->delete();

@@ -67,4 +67,10 @@ class TaskCest
         $I->dontSeeRecord('common\models\Task', ['id' => 2,]);
         $I->dontSee('Купить печенье');
     }
+
+    public function test404 (FunctionalTester $I)
+    {
+        $I->amOnRoute('site/delete', ['id' => 888]);
+        $I->see('Not Found (#404)');
+    }
 }
