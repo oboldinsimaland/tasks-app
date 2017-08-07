@@ -5,13 +5,13 @@ use Yii;
 use yii\base\Model;
 
 /**
- * Form for creating new task
+ * Form for creating new task and update task
  *
  * @property string $begin_at Start time of the task
  * @property string $end_at End time of the task
  * @property string $description Description of the task
  */
-class CreateTaskForm extends Model
+class TaskForm extends Model
 {
     /**
      * @var string the start time of the task
