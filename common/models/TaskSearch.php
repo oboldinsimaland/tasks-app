@@ -8,6 +8,13 @@ use common\models\Task;
 
 /**
  * TaskSearch represents the model behind the search form about `common\models\Task`.
+ *
+ * @property integer $id
+ * @property string $begin_at
+ * @property string $end_at
+ * @property boolean $is_complete
+ * @property string $description
+ * @property integer $user_id
  */
 class TaskSearch extends Task
 {
