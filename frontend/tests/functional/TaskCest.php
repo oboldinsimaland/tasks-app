@@ -68,9 +68,37 @@ class TaskCest
         $I->dontSee('Купить печенье');
     }
 
+    public function completeTask(FunctionalTester $I)
+    {
+        $I->amOnRoute('site/index');
+
+        $I->see('Сходить за продуктами', '.task.complete');
+        $I->seeRecord('common\models\Task', [
+            'description' => 'Сходить за продуктами',
+            'is_complete' => true,
+        ]);
+        $I->click('.task.complete a:nth-child(2)');
+        $I->dontSee('Сходить за продуктами', '.task.complete');
+        $I->seeRecord('common\models\Task', [
+            'description' => 'Сходить за продуктами',
+            'is_complete' => false,
+        ]);
+
+        $I->see('Сходить в кино', '[data-key=3]');
+        $I->dontSee('Сходить в кино', '.task.complete');
+        $I->click('[data-key=3] a:nth-child(3)');
+        $I->see('Сходить в кино', '.task.complete');
+    }
+
     public function test404(FunctionalTester $I)
     {
         $I->amOnRoute('site/delete', ['id' => 888]);
+        $I->see('Not Found (#404)');
+
+        $I->amOnRoute('site/complete', [
+            'id' => 1000,
+            'complete' => false,
+        ]);
         $I->see('Not Found (#404)');
     }
 }
