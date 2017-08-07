@@ -14,6 +14,7 @@ use common\models\TaskSearch;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller implements the CRUD actions for Task model
@@ -110,13 +111,14 @@ class SiteController extends Controller
     /**
      * Displays form for updating task and saves changes in db
      *
+     * @param integer $id
      * @return mixed
      */
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
         $post = Yii::$app->request->post();
         $model = new TaskForm();
-        $task = Task::findOne(Yii::$app->request->get('id'));
+        $task = $this->findModel($id);
 
         if ($task->user_id === Yii::$app->user->id && !$task->is_complete) {
             if ($model->load($post) && $model->validate()) {
@@ -132,6 +134,23 @@ class SiteController extends Controller
         }
 
         return $this->redirect(['site/index']);
+    }
+
+    /**
+     * Deletes task
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $task = $this->findModel($id);
+
+        if ($task->user_id === Yii::$app->user->id) {
+            $task->delete();
+        }
+
+        return $this->redirect('index');
     }
 
     /**
@@ -235,5 +254,23 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * Returns task by id
+     *
+     * @param integer $id
+     * @throws NotFoundHttpException
+     * @return Task
+     */
+    public static function findModel($id)
+    {
+        $model = Task::findOne($id);
+
+        if (isset($model)) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException("Model not found: $id");
+        }
     }
 }
