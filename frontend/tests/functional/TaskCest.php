@@ -59,4 +59,12 @@ class TaskCest
         ]);
         $I->see('Купить печенье');
     }
+
+    public function deleteTask(FunctionalTester $I)
+    {
+        $I->amOnRoute('site/index');
+        $I->click('[data-key=2] a:nth-child(1)');
+        $I->dontSeeRecord('common\models\Task', ['id' => 2,]);
+        $I->dontSee('Купить печенье');
+    }
 }

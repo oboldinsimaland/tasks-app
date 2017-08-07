@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Task;
+use function PHPSTORM_META\type;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -132,6 +133,18 @@ class SiteController extends Controller
         }
 
         return $this->redirect(['site/index']);
+    }
+
+    public function actionDelete()
+    {
+        $id = (integer) Yii::$app->request->get('id');
+        $task = Task::findOne($id);
+
+        if ($task->user_id === Yii::$app->user->id) {
+            $task->delete();
+        }
+
+        return $this->redirect('index');
     }
 
     /**
