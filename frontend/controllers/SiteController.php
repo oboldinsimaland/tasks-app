@@ -2,7 +2,6 @@
 namespace frontend\controllers;
 
 use common\models\Task;
-use function PHPSTORM_META\type;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -113,11 +112,11 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
         $post = Yii::$app->request->post();
         $model = new TaskForm();
-        $task = Task::findOne(Yii::$app->request->get('id'));
+        $task = Task::findOne($id);
 
         if ($task->user_id === Yii::$app->user->id && !$task->is_complete) {
             if ($model->load($post) && $model->validate()) {
@@ -140,9 +139,8 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        $id = (integer) Yii::$app->request->get('id');
         $task = Task::findOne($id);
 
         if ($task->user_id === Yii::$app->user->id) {
