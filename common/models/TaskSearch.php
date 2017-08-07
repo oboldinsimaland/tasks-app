@@ -9,12 +9,12 @@ use common\models\Task;
 /**
  * TaskSearch represents the model behind the search form about `common\models\Task`.
  *
- * @property integer $id
- * @property string $begin_at
- * @property string $end_at
- * @property boolean $is_complete
- * @property string $description
- * @property integer $user_id
+ * @property integer $id Task't id
+ * @property string $begin_at Start time of the task
+ * @property string $end_at End time of the task
+ * @property boolean $is_complete This shows whether the task is completed
+ * @property string $description Description of the task
+ * @property integer $user_id User's id
  */
 class TaskSearch extends Task
 {

@@ -6,15 +6,20 @@ use yii\base\Model;
 
 /**
  * Form for creating new task
- *
- * @property string $begin_at
- * @property string $end_at
- * @property string $description
  */
 class CreateTaskForm extends Model
 {
+    /**
+     * @var string the start time of the task
+     */
     public $begin_at;
+    /**
+     * @var string the end time of the task
+     */
     public $end_at;
+    /**
+     * @var string the description of the task
+     */
     public $description;
 
     /**
