@@ -135,6 +135,11 @@ class SiteController extends Controller
         return $this->redirect(['site/index']);
     }
 
+    /**
+     * Deletes task
+     *
+     * @return mixed
+     */
     public function actionDelete()
     {
         $id = (integer) Yii::$app->request->get('id');
