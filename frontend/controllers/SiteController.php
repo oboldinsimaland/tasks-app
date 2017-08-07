@@ -110,6 +110,7 @@ class SiteController extends Controller
     /**
      * Displays form for updating task and saves changes in db
      *
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -137,6 +138,7 @@ class SiteController extends Controller
     /**
      * Deletes task
      *
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
